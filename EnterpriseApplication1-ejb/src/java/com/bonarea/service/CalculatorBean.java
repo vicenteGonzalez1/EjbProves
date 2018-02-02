@@ -5,10 +5,25 @@
  */
 package com.bonarea.service;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  *
  * @author alumne
  */
+@Stateless
+@LocalBean
 public class CalculatorBean {
+    
+    @Inject
+    @Named("calculator")
+    ICalculator calculator;
+    
+    public int sum(int num1, int num2){
+        return calculator.suma(num1, num2);
+    }
     
 }
