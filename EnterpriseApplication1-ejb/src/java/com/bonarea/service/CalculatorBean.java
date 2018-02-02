@@ -26,4 +26,15 @@ public class CalculatorBean {
         return calculator.suma(num1, num2);
     }
     
+    public int resta(int num1, int num2){
+        return calculator.resta(num1, num2);
+    }
+
+    public int multiplicacio(int num1, int num2){
+        return calculator.multiplicacion(num1, num2);
+    }    
+    
+    public int divisio(int num1, int num2){
+        return calculator.multiplicacion(num1, num2);
+    }        
 }

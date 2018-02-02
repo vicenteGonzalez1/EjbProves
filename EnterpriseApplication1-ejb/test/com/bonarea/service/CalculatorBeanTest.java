@@ -53,5 +53,53 @@ public class CalculatorBeanTest {
         assertEquals(expResult, result);
         container.close();
     }
+
+    /**
+     * Test of resta method, of class CalculatorBean.
+     */
+    @Test
+    public void testResta() throws Exception {
+        System.out.println("resta");
+        int num1 = 2;
+        int num2 = 2;
+        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        CalculatorBean instance = (CalculatorBean)container.getContext().lookup("java:global/classes/CalculatorBean");
+        int expResult = 0;
+        int result = instance.resta(num1, num2);
+        assertEquals(expResult, result);
+        container.close();
+    }
+
+    /**
+     * Test of multiplicacio method, of class CalculatorBean.
+     */
+    @Test
+    public void testMultiplicacio() throws Exception {
+        System.out.println("multiplicacio");
+        int num1 = 2;
+        int num2 = 2;
+        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        CalculatorBean instance = (CalculatorBean)container.getContext().lookup("java:global/classes/CalculatorBean");
+        int expResult = 4;
+        int result = instance.multiplicacio(num1, num2);
+        assertEquals(expResult, result);
+        container.close();
+    }
+
+    /**
+     * Test of divisio method, of class CalculatorBean.
+     */
+    @Test
+    public void testDivisio() throws Exception {
+        System.out.println("divisio");
+        int num1 = 4;
+        int num2 = 2;
+        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        CalculatorBean instance = (CalculatorBean)container.getContext().lookup("java:global/classes/CalculatorBean");
+        int expResult = 2;
+        int result = instance.divisio(num1, num2);
+        assertEquals(expResult, result);
+        container.close();
+    }
     
 }
