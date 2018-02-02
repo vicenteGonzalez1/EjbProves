@@ -51,7 +51,7 @@ public class StudentBeanTest {
         model.setCard_id("345345636YY");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IStudentBeanLocal instance = (IStudentBeanLocal)container.getContext().lookup("java:global/classes/StudentBean");
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.add(model);
         assertEquals(expResult, result);
         container.close();
