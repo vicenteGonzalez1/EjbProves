@@ -1,1 +1,6 @@
 /EnterpriseApplication1-ejb/build/
+/EnterpriseApplication1-ejb/dist/
+/dist/
+/build/
+/EnterpriseApplication1-war/build/
+/EnterpriseApplication1-war/dist/

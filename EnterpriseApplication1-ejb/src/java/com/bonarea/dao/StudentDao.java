@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 @MySqlDao
 public class StudentDao implements IDao<Student> {
     
-    @Resource(name="jdbc/mysql")
+    @Resource(name="jdbc/myDataSource")
     private DataSource dataSource;
 
     public StudentDao(){}
@@ -35,12 +35,12 @@ public class StudentDao implements IDao<Student> {
 
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString (1, "Barney");
-            preparedStmt.setString (2, "Rubble");
-            preparedStmt.setString (3, "45895489");
+            preparedStmt.setString (1, model.getName());
+            preparedStmt.setString (2, model.getSurname());
+            preparedStmt.setString (3, model.getCard_id());
             
             // execute the preparedstatement
-            preparedStmt.execute();            
+            result = preparedStmt.executeUpdate();            
         }
         return result;
     }
