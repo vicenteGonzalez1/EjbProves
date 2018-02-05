@@ -7,6 +7,7 @@ package com.bonarea.service;
 
 import com.bonarea.model.Student;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.embeddable.EJBContainer;
 import org.junit.After;
@@ -89,6 +90,31 @@ public class StudentBeanTest {
 
             assertTrue(instance.getAll().size() > 0);
 
+            container.close();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    @Test
+    public void testGetRenge() throws Exception {
+        try {
+            int from = 0;
+            int to = 9;
+
+            Map<String, Object> properties = new HashMap<String, Object>();
+            properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
+                    "domain.xml");
+
+            EJBContainer container
+                    = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
+
+            //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+            IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
+            int expResult = 1;
+            List<Student> result = instance.getRange(from, to);
+
+            assertTrue(result.size() > 0);
             container.close();
         } catch (Exception ex) {
             throw ex;

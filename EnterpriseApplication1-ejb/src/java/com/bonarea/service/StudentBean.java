@@ -33,4 +33,9 @@ public class StudentBean implements IStudentBeanLocal<Student> {
     public List<Student> getAll() throws SQLException {
         return studentDao.getAll();
     }    
+
+    @Override
+    public List<Student> getRange(int from, int to) throws SQLException {
+        return studentDao.getRange(from, to);
+    }
 }
