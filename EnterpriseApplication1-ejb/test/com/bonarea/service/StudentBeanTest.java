@@ -31,7 +31,7 @@ public class StudentBeanTest {
     public static void setUpClass() {
         Map<String, Object> properties = new HashMap<String, Object>();
         properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
-                "domain.xml");
+                "domain-universe.xml");
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);        
     }
 
@@ -55,6 +55,7 @@ public class StudentBeanTest {
     public void testAdd() throws Exception {
         System.out.println("add");
         Student model = new Student();
+        model.setStudent_id(222);
         model.setName("pepe");
         model.setSurname("Garces");
         model.setCard_id("345345636YY");
@@ -94,6 +95,44 @@ public class StudentBeanTest {
             List<Student> result = instance.getRange(from, to);
 
             assertTrue(result.size() > 0);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    @Test
+    public void testUpdate() throws Exception {
+        try {
+            Student model = new Student();
+            model.setStudent_id(1);
+            model.setName("pepe");
+            model.setSurname("Cortazar");
+            model.setCard_id("345345636YY");
+
+            IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
+            int expResult = 1;
+            int result = instance.update(model);
+
+            assertTrue(result == 1);            
+            
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    @Test
+    public void testDelete() throws Exception {
+        try {
+            Student model = new Student();
+            model.setStudent_id(1);
+            model.setName("pepe");
+            model.setSurname("Cortazar");
+            model.setCard_id("345345636YY");
+            IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
+            int expResult = 1;
+            int result = instance.delete(model);
+
+            assertTrue(result == 1);                        
         } catch (Exception ex) {
             throw ex;
         }

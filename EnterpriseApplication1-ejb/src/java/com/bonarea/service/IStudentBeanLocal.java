@@ -15,7 +15,14 @@ import javax.ejb.Local;
  */
 @Local
 public interface IStudentBeanLocal<T> {
+
     public int add(T model) throws SQLException;
+
     public List<T> getAll() throws SQLException;
+
     public List<T> getRange(int from, int to) throws SQLException;
+
+    public int update(T model) throws SQLException;
+
+    public int delete(T model) throws SQLException;
 }

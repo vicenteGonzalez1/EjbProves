@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface IDao<T> {
     public int add(T model) throws SQLException;
+    public int update(T model) throws SQLException;
+    public int delete(T model) throws SQLException;
     public List<T> getAll() throws SQLException;
     public List<T> getRange(int from, int to) throws SQLException;
 }

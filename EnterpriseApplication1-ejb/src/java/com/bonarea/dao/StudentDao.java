@@ -57,7 +57,7 @@ public class StudentDao implements IDao<Student> {
             PreparedStatement st = con.prepareStatement(query);
 
             ResultSet rs = st.executeQuery();
-
+            
             List<Student> studentList = new ArrayList<Student>();
             while (rs.next()) {
                 Student student = new Student();
@@ -91,5 +91,30 @@ public class StudentDao implements IDao<Student> {
             return studentList;
         }
     }
+
+    @Override
+    public int update(Student model) throws SQLException {
+        try (Connection con = dataSource.getConnection()) {
+            String query = "Update student set name=?, surname=?, card_id=? where student_id = ? ;";
+            PreparedStatement st = con.prepareStatement(query);
+            st.setString(1, model.getName());
+            st.setString(2, model.getSurname());
+            st.setString(3, model.getCard_id());
+            st.setInt(4, model.getStudent_id());
+            return st.executeUpdate();
+        }
+    }
+
+    @Override
+    public int delete(Student model) throws SQLException {
+        try (Connection con = dataSource.getConnection()) {
+            String query ="delete from student where student_id=?" ;
+            PreparedStatement st = con.prepareStatement(query);
+            st.setInt(1, model.getStudent_id());
+            return st.executeUpdate();
+        }
+    }
+    
+    
 
 }

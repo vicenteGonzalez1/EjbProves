@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.bonarea.dao.MySqlDao;
 import com.bonarea.dao.StudentDao;
+import com.bonarea.dao.StudentDaoUniverse;
+import com.bonarea.dao.UniverseDao;
 import java.util.List;
 
 /**
@@ -21,8 +23,8 @@ import java.util.List;
 public class StudentBean implements IStudentBeanLocal<Student> {
 
     @Inject
-    @MySqlDao
-    StudentDao studentDao;
+    @UniverseDao
+    StudentDaoUniverse studentDao;
     
     @Override
     public int add(Student model) throws SQLException {
@@ -37,5 +39,15 @@ public class StudentBean implements IStudentBeanLocal<Student> {
     @Override
     public List<Student> getRange(int from, int to) throws SQLException {
         return studentDao.getRange(from, to);
+    }
+
+    @Override
+    public int update(Student model) throws SQLException {
+        return studentDao.update(model);
+    }
+
+    @Override
+    public int delete(Student model) throws SQLException {
+        return studentDao.delete(model);
     }
 }
