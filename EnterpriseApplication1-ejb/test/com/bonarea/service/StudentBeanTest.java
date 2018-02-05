@@ -60,12 +60,38 @@ public class StudentBeanTest {
                 = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
 
         //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        
-        IStudentBeanLocal instance = (IStudentBeanLocal)container.getContext().lookup("java:global/classes/StudentBean");
+        IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
         int expResult = 1;
         int result = instance.add(model);
         assertEquals(expResult, result);
         container.close();
     }
 
+    @Test
+    public void testGetAll() throws Exception {
+        try {
+            Student model = new Student();
+            model.setName("pepe");
+            model.setSurname("Garces");
+            model.setCard_id("345345636YY");
+
+            Map<String, Object> properties = new HashMap<String, Object>();
+            properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
+                    "domain.xml");
+
+            EJBContainer container
+                    = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
+
+            //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+            IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
+            int expResult = 1;
+            int result = instance.add(model);
+
+            assertTrue(instance.getAll().size() > 0);
+
+            container.close();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
 }

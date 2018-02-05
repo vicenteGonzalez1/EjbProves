@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import com.bonarea.dao.MySqlDao;
 import com.bonarea.dao.StudentDao;
+import java.util.List;
 
 /**
  *
@@ -27,4 +28,9 @@ public class StudentBean implements IStudentBeanLocal<Student> {
     public int add(Student model) throws SQLException {
         return studentDao.add(model);
     }
+    
+    @Override
+    public List<Student> getAll() throws SQLException {
+        return studentDao.getAll();
+    }    
 }

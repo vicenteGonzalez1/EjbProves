@@ -6,6 +6,7 @@
 package com.bonarea.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,4 +16,5 @@ import javax.ejb.Local;
 @Local
 public interface IStudentBeanLocal<T> {
     public int add(T model) throws SQLException;
+    public List<T> getAll() throws SQLException;
 }

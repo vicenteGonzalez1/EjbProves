@@ -6,6 +6,7 @@
 package com.bonarea.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import java.sql.SQLException;
  */
 public interface IDao<T> {
     public int add(T model) throws SQLException;
+    public List<T> getAll() throws SQLException;
 }

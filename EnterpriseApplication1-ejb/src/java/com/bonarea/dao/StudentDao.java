@@ -9,7 +9,10 @@ import javax.enterprise.context.RequestScoped;
 import com.bonarea.model.Student;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -43,6 +46,28 @@ public class StudentDao implements IDao<Student> {
             result = preparedStmt.executeUpdate();            
         }
         return result;
+    }
+
+    @Override
+    public List<Student> getAll() throws SQLException {
+        try(Connection con = dataSource.getConnection()){
+            String query = "Select * from student;";
+            
+            PreparedStatement st = con.prepareStatement(query);
+            
+            ResultSet rs = st.executeQuery();
+            
+            List<Student> studentList = new ArrayList<Student>();
+            while(rs.next()) {
+                Student student = new Student();
+                student.setStudent_id(rs.getInt("student_id"));
+                student.setCard_id(rs.getString("name"));
+                student.setSurname(rs.getString("surname"));
+                student.setCard_id(rs.getString("card_id"));
+                studentList.add(student);
+            }
+            return studentList;
+        }
     }
     
 }
