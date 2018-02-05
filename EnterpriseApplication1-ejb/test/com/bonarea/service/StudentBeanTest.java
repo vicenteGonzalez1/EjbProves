@@ -23,15 +23,21 @@ import static org.junit.Assert.*;
  */
 public class StudentBeanTest {
 
+    static EJBContainer container = null;
     public StudentBeanTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
+                "domain.xml");
+        container = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);        
     }
 
     @AfterClass
     public static void tearDownClass() {
+        container.close();
     }
 
     @Before
@@ -53,19 +59,10 @@ public class StudentBeanTest {
         model.setSurname("Garces");
         model.setCard_id("345345636YY");
 
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
-                "domain.xml");
-
-        EJBContainer container
-                = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
-
-        //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
         int expResult = 1;
         int result = instance.add(model);
         assertEquals(expResult, result);
-        container.close();
     }
 
     @Test
@@ -76,21 +73,11 @@ public class StudentBeanTest {
             model.setSurname("Garces");
             model.setCard_id("345345636YY");
 
-            Map<String, Object> properties = new HashMap<String, Object>();
-            properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
-                    "domain.xml");
-
-            EJBContainer container
-                    = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
-
-            //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
             IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
             int expResult = 1;
             int result = instance.add(model);
 
             assertTrue(instance.getAll().size() > 0);
-
-            container.close();
         } catch (Exception ex) {
             throw ex;
         }
@@ -102,20 +89,11 @@ public class StudentBeanTest {
             int from = 0;
             int to = 9;
 
-            Map<String, Object> properties = new HashMap<String, Object>();
-            properties.put("org.glassfish.ejb.embedded.glassfish.configuration.file",
-                    "domain.xml");
-
-            EJBContainer container
-                    = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
-
-            //EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
             IStudentBeanLocal instance = (IStudentBeanLocal) container.getContext().lookup("java:global/classes/StudentBean");
             int expResult = 1;
             List<Student> result = instance.getRange(from, to);
 
             assertTrue(result.size() > 0);
-            container.close();
         } catch (Exception ex) {
             throw ex;
         }
